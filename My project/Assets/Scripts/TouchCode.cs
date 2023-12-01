@@ -23,8 +23,7 @@ public class TouchCode : MonoBehaviour
     private PlayerInput playerInput;
     private InputAction touchPositionAction;
     private InputAction touchPressAction;
-    [SerializeField] Vector2 moveInput;
-    private Transform currentLocation;
+    //[SerializeField] Vector2 moveInput;
     //Run
     private bool runStart = true;
     private bool Undamaged = true;
@@ -34,12 +33,17 @@ public class TouchCode : MonoBehaviour
     //Jump
     [SerializeField] float jumpHeight = 10f;
     //Slide
+    [SerializeField] float slideCooldown = 2f;
+    private float lastSlide;
+    private float currentSlideTime;
     private bool onSlideCoroutineEnemy = false;
     [SerializeField] private float slideTime = 1f;
     void Start()
     {   
         //Dir inicio default 
-        dir = false;
+        dir = true;
+        lastSlide = Time.time;
+
         //Obtener instancias
         Debug.Log(dir);
         myRigidbody2D = GetComponent<Rigidbody2D>();
@@ -48,12 +52,12 @@ public class TouchCode : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         touchPressAction = playerInput.actions.FindAction("TouchPress");
         touchPositionAction = playerInput.actions.FindAction("TouchPosition");
-        currentLocation  = GetComponent<Transform>();
-        Debug.Log(myRigidbody2D.velocity);
+        //Debug.Log(myRigidbody2D.velocity);
     }
     // Update is called once per frame
     void Update()
     {
+        //dir decide la dirección-> true: derecha, false: izquierda
         if (dir == true)
         {
            
@@ -67,9 +71,12 @@ public class TouchCode : MonoBehaviour
             {
                 SlideRight();
             }
-            //Saltar derecha
-            JumpRight();
-            Debug.Log(myRigidbody2D.velocity);
+            //Saltar derecha solo cuando este tocando el piso
+            if (myCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground")))
+            {
+                JumpRight();
+            }
+            
         }
         //izquierda
         else if(dir == false)
@@ -85,9 +92,12 @@ public class TouchCode : MonoBehaviour
             {
                 SlideLeft();
             }
-            //Saltar izq
-            JumpLeft();
-            Debug.Log(myRigidbody2D.velocity);
+            //Saltar izquierda solo cuando este tocando el piso
+            if (myCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground")))
+            {
+                JumpLeft();
+            }
+            //Debug.Log(myRigidbody2D.velocity);
         }
         
     }
@@ -133,21 +143,7 @@ public class TouchCode : MonoBehaviour
         coroutineEnemy = false;
     }
         //Slide
-    IEnumerator EnemyAvoid()
-    {
-        onSlideCoroutineEnemy = true;
-        Debug.Log("Shuush!!");
-        //Quita gravedad y vuelve al collider trigger para que detecte si toca el collider del enemigo
-        myRigidbody2D.gravityScale = 0f;
-        myCollider2D.isTrigger = true;
-        //myCollider2D.enabled = false;
-        yield return new WaitForSeconds(slideTime);
-        myRigidbody2D.gravityScale = gravedad;
-        myCollider2D.isTrigger = false;
-        //myCollider2D.enabled = true;
-        onSlideCoroutineEnemy = false;
-        Debug.Log("Fin corrutina");
-    }
+    
 
     //Movement functions
     void RunRight()
@@ -176,7 +172,7 @@ public class TouchCode : MonoBehaviour
         {
             if (Undamaged)
             {
-                Debug.Log("Permanente Derecha");
+                //Debug.Log("Permanente Derecha");
                 myRigidbody2D.velocity = new Vector3(moveSpeedR, myRigidbody2D.velocity.y);
             }          
         }   
@@ -209,7 +205,7 @@ public class TouchCode : MonoBehaviour
         {
             if (Undamaged)
             {
-                Debug.Log("Permanente Izquierda");
+                //Debug.Log("Permanente Izquierda");
                 myRigidbody2D.velocity = new Vector3(moveSpeedL, myRigidbody2D.velocity.y);
             }
         }
@@ -242,15 +238,66 @@ public class TouchCode : MonoBehaviour
         }
     }
 
+
+    IEnumerator EnemyAvoid()
+    {
+        float Area = 50f;
+        //Evita que se vuelva a entrar a la rutina mientras este en ejecución
+        onSlideCoroutineEnemy = true;
+        Debug.Log("Shuush!!");
+
+        //Obtiene un arreglo con los colliders2D dentro un area
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(myTransform.position,Area);
+
+        //Recorremos el arreglo hasta encontrar el que este asignado a un objeto con la etiqueta Enemy
+        //y desactiva su componente collider2D
+        foreach (Collider2D objeto in colliders)
+        {          
+            if (objeto.CompareTag("Enemy"))
+            {
+                Debug.Log("Enemigo encontrado");
+                objeto.GetComponent<Collider2D>().enabled = false;
+            }
+            
+        }
+
+        Debug.Log("Inicio Invulnerabilidad");
+        //En este tiempo puede regresa a la invocación de la rutina, y ejecuta lo que seguía hasta que termine el tiepo
+        //Cuando termine el tiempo, retoma justo después del yield
+        yield return new WaitForSeconds(slideTime);
+        //Recorremos el arreglo anterior hasta encontrar el que este asignado a un objeto con la etiqueta Enemy
+        //y lo volvemos le activamos su compoenente collider2D
+        foreach (Collider2D objeto in colliders)
+        {         
+            if (objeto.CompareTag("Enemy"))
+            {
+                objeto.GetComponent<Collider2D>().enabled = true;
+            }
+        }
+        onSlideCoroutineEnemy = false;
+        Debug.Log("Fin Invulnerabilidad");
+    }
+
     void SlideRight()
     {
         if (touchPressAction.WasPressedThisFrame())
         {
+            // Validar que la posición que presionó de la patalla corresponde al del Slide (Abajo a la izquierda)
             Vector3 position = Camera.main.ScreenToWorldPoint(touchPositionAction.ReadValue<Vector2>());
             if (position.x < Camera.main.transform.position.x && position.y < Camera.main.transform.position.y)
             {
+                //Checamos el cooldown de la abilidad, si aún falta tiempo, no hace nada
+                if (Time.time - lastSlide < slideCooldown)
+                {
+                    Debug.Log("abilidad en cooldown"+ (Time.time - lastSlide));
+                    return;
+                }
+                //Inicia rutina              
+                lastSlide = Time.time;
+                Debug.Log("inicia rutina Slide derecha");
                 StartCoroutine("EnemyAvoid");
-                Debug.Log("Slide");
+                
+              
             }
 
         }
@@ -258,13 +305,22 @@ public class TouchCode : MonoBehaviour
 
     void SlideLeft()
     {
+        // Validar que la posición que presionó de la patalla corresponde al del Slide (Abajo a la derecha)
         if (touchPressAction.WasPressedThisFrame())
         {
             Vector3 position = Camera.main.ScreenToWorldPoint(touchPositionAction.ReadValue<Vector2>());
             if (position.x > Camera.main.transform.position.x && position.y < Camera.main.transform.position.y)
             {
+                //Checamos el cooldown de la abilidad, si aún falta tiempo, no hace nada
+                if (Time.time - lastSlide < slideCooldown)
+                {
+                    Debug.Log("abilidad en cooldown" + (Time.time - lastSlide));
+                    return;
+                }
+                //Inicia rutina              
+                lastSlide = Time.time;
+                Debug.Log("inicia rutina Slide derecha");
                 StartCoroutine("EnemyAvoid");
-                Debug.Log("Slide");
             }
 
         }
