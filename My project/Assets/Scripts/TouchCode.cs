@@ -16,7 +16,6 @@ public class TouchCode : MonoBehaviour
     CapsuleCollider2D myCollider2D;
     [SerializeField] GameObject player;
     //Variables inciales
-    private float gravedad = 1f;
     [SerializeField] float moveSpeedR = 10f;
     [SerializeField] float moveSpeedL = -10f;
     //Input
@@ -27,9 +26,9 @@ public class TouchCode : MonoBehaviour
     //Run
     private bool runStart = true;
     private bool Undamaged = true;
-    private float reboteEnemigo = -10f;
+    [SerializeField] float reboteEnemigo = -10f;
     [SerializeField] private float bounceTimeEnemy = 1f;
-    private bool coroutineEnemy = false;
+    public bool coroutineEnemy = false;
     //Jump
     [SerializeField] float jumpHeight = 10f;
     //Slide
@@ -57,6 +56,7 @@ public class TouchCode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         //dir decide la dirección-> true: derecha, false: izquierda
         if (dir == true)
         {
@@ -325,6 +325,8 @@ public class TouchCode : MonoBehaviour
 
         }
     }
+
+    
 
 
 

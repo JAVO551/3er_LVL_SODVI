@@ -8,11 +8,8 @@ public class Switch : MonoBehaviour
     [SerializeField] GameObject piedra;
     [SerializeField] GameObject player;
     Rigidbody2D playerRigidbody2D;
+    SpriteRenderer playerSprite;
     TouchCode playerTouchCode;
-    void Start()
-    {
-      
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -22,6 +19,8 @@ public class Switch : MonoBehaviour
             Debug.Log("Switch!!");
             playerTouchCode = collision.gameObject.GetComponent<TouchCode>();
             playerTouchCode.dir = !playerTouchCode.dir;
+            playerSprite = collision.gameObject.GetComponent<SpriteRenderer>();
+            playerSprite.flipX = !playerSprite.flipX;
         }
     }
     void Cambio()
