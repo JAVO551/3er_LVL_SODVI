@@ -37,6 +37,8 @@ public class TouchCode : MonoBehaviour
     private float currentSlideTime;
     private bool onSlideCoroutineEnemy = false;
     [SerializeField] private float slideTime = 1f;
+    //Animación
+    [SerializeField] Animator animator;
     void Start()
     {   
         //Dir inicio default 
@@ -56,11 +58,25 @@ public class TouchCode : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        //Espera a que el jugador elija dirección para empezar 
+        //if jugador toco pantalla izq escojer dir = 0, else lo otro
+        //Ade´más prender bander
+        //If bandera prendida, empezar movimiento
+        //Inicia las condiciones de movimiento
+        //Prende el animator que esta por dault apagado
+        empezarMov();
+
+
+
+    }
+
+    void empezarMov()
+    {
         //dir decide la dirección-> true: derecha, false: izquierda
         if (dir == true)
         {
-           
+
             //Correr derecha
             if (coroutineEnemy == false)
             {
@@ -76,12 +92,12 @@ public class TouchCode : MonoBehaviour
             {
                 JumpRight();
             }
-            
+
         }
         //izquierda
-        else if(dir == false)
+        else if (dir == false)
         {
-           
+
             //Correr izq
             if (coroutineEnemy == false)
             {
@@ -99,9 +115,7 @@ public class TouchCode : MonoBehaviour
             }
             //Debug.Log(myRigidbody2D.velocity);
         }
-        
     }
-
  
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -218,8 +232,11 @@ public class TouchCode : MonoBehaviour
             Vector3 position = Camera.main.ScreenToWorldPoint(touchPositionAction.ReadValue<Vector2>());
             if (position.x < Camera.main.transform.position.x && position.y > Camera.main.transform.position.y)
             {
+                //Iniciamos animación de salto
+
                 Debug.Log("JumpR");
                 myRigidbody2D.velocity = new Vector3(myRigidbody2D.velocity.x, myRigidbody2D.velocity.y + jumpHeight);
+                //Iniciamos animación de caida
             }
             
         }
