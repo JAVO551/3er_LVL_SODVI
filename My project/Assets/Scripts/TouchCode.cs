@@ -42,7 +42,7 @@ public class TouchCode : MonoBehaviour
     void Start()
     {   
         //Dir inicio default 
-        dir = true;
+        dir = false;
         lastSlide = Time.time;
 
         //Obtener instancias
@@ -90,7 +90,11 @@ public class TouchCode : MonoBehaviour
             //Saltar derecha solo cuando este tocando el piso
             if (myCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground")))
             {
+                //Desactivamos animación salto
+                animator.SetBool("isJumpingR", false);
                 JumpRight();
+                
+                
             }
 
         }
@@ -111,6 +115,7 @@ public class TouchCode : MonoBehaviour
             //Saltar izquierda solo cuando este tocando el piso
             if (myCollider2D.IsTouchingLayers(LayerMask.GetMask("Ground")))
             {
+                animator.SetBool("isJumpingL", false);
                 JumpLeft();
             }
             //Debug.Log(myRigidbody2D.velocity);
@@ -176,6 +181,8 @@ public class TouchCode : MonoBehaviour
                     Debug.Log("Derecha una vez");
                     runStart = false;
                     myRigidbody2D.velocity = new Vector3(moveSpeedR, myRigidbody2D.velocity.y);
+                    //Activamos animación
+                    animator.enabled = true;
                 }
 
             }
@@ -188,6 +195,7 @@ public class TouchCode : MonoBehaviour
             {
                 //Debug.Log("Permanente Derecha");
                 myRigidbody2D.velocity = new Vector3(moveSpeedR, myRigidbody2D.velocity.y);
+                //animator.enabled = true;
             }          
         }   
     }
@@ -207,8 +215,13 @@ public class TouchCode : MonoBehaviour
                 {
                     //Abre candado
                     Debug.Log("Izquierda una vez");
+                    
                     runStart = false;
                     myRigidbody2D.velocity = new Vector3(moveSpeedL, myRigidbody2D.velocity.y);
+                    //Animaciones
+                    animator.enabled = true;
+                    animator.SetBool("isLeft", true);
+                    
                 }
 
             }
@@ -233,10 +246,10 @@ public class TouchCode : MonoBehaviour
             if (position.x < Camera.main.transform.position.x && position.y > Camera.main.transform.position.y)
             {
                 //Iniciamos animación de salto
-
-                Debug.Log("JumpR");
-                myRigidbody2D.velocity = new Vector3(myRigidbody2D.velocity.x, myRigidbody2D.velocity.y + jumpHeight);
-                //Iniciamos animación de caida
+                //iniciamos el animador or cualquier cosa
+                animator.enabled = true;
+                animator.SetBool("isJumpingR", true);
+                myRigidbody2D.velocity = new Vector3(myRigidbody2D.velocity.x, myRigidbody2D.velocity.y + jumpHeight);  
             }
             
         }
@@ -249,6 +262,10 @@ public class TouchCode : MonoBehaviour
             if (position.x > Camera.main.transform.position.x && position.y > Camera.main.transform.position.y)
             {
                 Debug.Log("JumpL");
+                //Animaciones
+                animator.enabled = true;
+                animator.SetBool("isJumpingL", true);
+                animator.SetBool("isLeft", true);
                 myRigidbody2D.velocity = new Vector3(myRigidbody2D.velocity.x, myRigidbody2D.velocity.y + jumpHeight);
             }
 
