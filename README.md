@@ -29,15 +29,13 @@ En este apartado, incluiras una descripción detallada de cómo se llevó a cabo
 
 ![image](https://github.com/JAVO551/3er_LVL_SODVI/assets/112450653/c17500d6-ac8f-4bd3-8ede-9cb554b04825)
 
-![image](https://github.com/JAVO551/3er_LVL_SODVI/assets/112450653/de1e1715-d916-4265-ae75-e160c955d280)
-
-
-
-![image](https://github.com/JAVO551/3er_LVL_SODVI/assets/112450653/b13e1626-8200-4082-8a05-9e9ec2f2c6e0)
 
 
 
 
+![image](https://github.com/JAVO551/3er_LVL_SODVI/assets/112450653/205da0dd-8f73-4906-a3bf-9ab76e48fb2f)
+
+![image](https://github.com/JAVO551/3er_LVL_SODVI/assets/112450653/03985d0a-5015-4b82-94cb-9ed449607f96)
 
 
 
