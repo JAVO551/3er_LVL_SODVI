@@ -19,6 +19,7 @@ public class Atacar : MonoBehaviour
             playerStats.health = playerStats.health - 1;
             Debug.Log(playerStats.health);
 
+
         }
     }
 }

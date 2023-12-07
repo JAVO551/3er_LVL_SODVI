@@ -11,8 +11,12 @@ public class Switch : MonoBehaviour
     SpriteRenderer playerSprite;
     TouchCode playerTouchCode;
     [SerializeField] Animator animator;
+    //Sonido
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip audioClip;
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        //Cambia la dirección del jugador
         if (collision.gameObject.tag == "Player")
         {
             //Cambia la variable "dir" de TouchCode a la opuesta de la actual
@@ -21,6 +25,9 @@ public class Switch : MonoBehaviour
             playerTouchCode.dir = !playerTouchCode.dir;
             //playerSprite = collision.gameObject.GetComponent<SpriteRenderer>();
             //playerSprite.flipX = !playerSprite.flipX;
+            //Activamos sonido de cambio
+            audioSource.clip = audioClip;
+            audioSource.Play();
             if (playerTouchCode.dir == true)
             {
                 animator.SetBool("isLeft", false);
@@ -31,13 +38,5 @@ public class Switch : MonoBehaviour
             }
             
         }
-    }
-    void Cambio()
-    {
-        
-    }
-    void Update()
-    {
-        
     }
 }

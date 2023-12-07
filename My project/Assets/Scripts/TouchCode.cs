@@ -39,10 +39,14 @@ public class TouchCode : MonoBehaviour
     [SerializeField] private float slideTime = 1f;
     //Animación
     [SerializeField] Animator animator;
+    //Inicio del juego
+    private bool inicio;
+    //Sonido
+    [SerializeField] PlayerSoundEffects sonidoCode;
     void Start()
     {   
         //Dir inicio default 
-        dir = false;
+        //dir = true;
         lastSlide = Time.time;
 
         //Obtener instancias
@@ -59,13 +63,39 @@ public class TouchCode : MonoBehaviour
     void Update()
     {
 
-        //Espera a que el jugador elija dirección para empezar 
-        //if jugador toco pantalla izq escojer dir = 0, else lo otro
-        //Ade´más prender bander
-        //If bandera prendida, empezar movimiento
+        //Espera a que el jugador elija dirección para empezar
+        if(inicio == true)
+        {
+            empezarMov();
+        }
+        else
+        {
+            if (touchPressAction.WasPressedThisFrame())
+            {
+                //Se obtiene posición del touch
+                Vector3 position = Camera.main.ScreenToWorldPoint(touchPositionAction.ReadValue<Vector2>());
+                
+                //Comparamos si fue en la mitad izquierda o derecha de la pantalla
+                if (position.x > Camera.main.transform.position.x)
+                {
+                    dir = true;
+                    animator.enabled = true;
+                    inicio = true;
+                }
+                if (position.x < Camera.main.transform.position.x)
+                {
+                    dir = false;
+                    animator.enabled = true;
+                    inicio = true;
+                }
+            }
+                
+
+        }
+        
         //Inicia las condiciones de movimiento
         //Prende el animator que esta por dault apagado
-        empezarMov();
+        
 
 
 
@@ -147,8 +177,10 @@ public class TouchCode : MonoBehaviour
     {
         coroutineEnemy = true;
         Debug.Log("Ouch!!");
+        //Sonido
+        sonidoCode.Daño();
         //Si va a la derecha
-        if(dir == true)
+        if (dir == true)
         {
             myRigidbody2D.AddForce(new Vector2(reboteEnemigo, 0), ForceMode2D.Impulse);
         }
@@ -249,7 +281,9 @@ public class TouchCode : MonoBehaviour
                 //iniciamos el animador or cualquier cosa
                 animator.enabled = true;
                 animator.SetBool("isJumpingR", true);
-                myRigidbody2D.velocity = new Vector3(myRigidbody2D.velocity.x, myRigidbody2D.velocity.y + jumpHeight);  
+                myRigidbody2D.velocity = new Vector3(myRigidbody2D.velocity.x, myRigidbody2D.velocity.y + jumpHeight);
+                //Sonido
+                sonidoCode.Jump();
             }
             
         }
@@ -267,6 +301,8 @@ public class TouchCode : MonoBehaviour
                 animator.SetBool("isJumpingL", true);
                 animator.SetBool("isLeft", true);
                 myRigidbody2D.velocity = new Vector3(myRigidbody2D.velocity.x, myRigidbody2D.velocity.y + jumpHeight);
+                //Sonido
+                sonidoCode.Jump();
             }
 
         }
@@ -279,7 +315,8 @@ public class TouchCode : MonoBehaviour
         //Evita que se vuelva a entrar a la rutina mientras este en ejecución
         onSlideCoroutineEnemy = true;
         Debug.Log("Shuush!!");
-
+        //Sonido
+        sonidoCode.Slide();
         //Obtiene un arreglo con los colliders2D dentro un area
         Collider2D[] colliders = Physics2D.OverlapCircleAll(myTransform.position,Area);
 
