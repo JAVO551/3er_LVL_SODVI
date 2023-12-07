@@ -5,8 +5,11 @@
 **Integrantes:**
 
 *Javier Diaz - Manager 
+
 *Carlos Villaseñor - Coder 
+
 *Jorge Gutierrez- Artista 
+
 *Fernando Tenorio - Músico
 
 
@@ -28,15 +31,8 @@ Además, adjuntar al menos cinco imágenes que muestran el proceso de trabajo, j
 
 Para finalizar, cada miembro del equipo presentará una conclusión que resumirá los logros y aprendizajes obtenidos durante el desarrollo de este proyecto.
 
-<!-- Cuando entregues tu documentación, por favor, borra todo lo que esté debajo. -->
-<div align="center">
-<br>
-<br>
-<br>
-<br>
-<p align="center">
-  <img src="rexLogo.png" alt="Logo de Fernando Rosas" width="100"/>
-</p>
-<h3 align="center">Documentado por Fernando Rosas</h3>
+
+
+<h3 align="center">Documentado por Díaz Rivera Javier Enrique</h3>
 </div>
 
