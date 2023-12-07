@@ -27,7 +27,8 @@ Por esa razon nos propusimos aprovechar los controles táctiles que nos ofrecen 
 
 En este apartado, incluiras una descripción detallada de cómo se llevó a cabo la creación de tu proyecto y las razones detrás de las decisiones que tomaste.
 
-Además, adjuntar al menos cinco imágenes que muestran el proceso de trabajo, junto con su correspondiente descripción del proyecto.
+![image](https://github.com/JAVO551/3er_LVL_SODVI/assets/112450653/c17500d6-ac8f-4bd3-8ede-9cb554b04825)
+
 
 ## **Conclusión:** 
 
