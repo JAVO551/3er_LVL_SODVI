@@ -19,7 +19,9 @@
 
 ## **Introducción:**
 
-En esta sección, describiré brevemente tu proyecto y el principal objetivo que espero lograr con su desarrollo.
+El objetivo del nivel fue crear un plataformero en 2D para dispositivos moviles para ello pudimos haber trabajado en la creación de un plataformero 2D convencional, sin embargo, el hecho de solamente emular la forma de jugar de un plataformero 2D de consola en un dispositivo movil implicaría dejar de lado las características únicas de los dispositivos móviles y no explota su máximo potencial.
+
+Por esa razon nos propusimos aprovechar los controles táctiles que nos ofrecen los dispositivos móviles para crear un plataformero con controles sencillos e intuitivos, pero a la vez explotar al máximo esta limitación de controles para crear un juego lo más satisfactorio posible en sus niveles. 
 
 ## **Descripción del proyecto:**
 
