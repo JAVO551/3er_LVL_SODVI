@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Coleccionable : MonoBehaviour
 {
+    [SerializeField] AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,6 +23,7 @@ public class Coleccionable : MonoBehaviour
         // Si choca contra este objeto el jugador
         if (collision.gameObject.tag == "Player")
         {
+            audioSource.Play();
             Destroy(gameObject);
         }
     }

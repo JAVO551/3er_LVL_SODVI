@@ -280,6 +280,7 @@ public class TouchCode : MonoBehaviour
                 //Iniciamos animación de salto
                 //iniciamos el animador or cualquier cosa
                 animator.enabled = true;
+                Debug.Log("Activamos salto animacion");
                 animator.SetBool("isJumpingR", true);
                 myRigidbody2D.velocity = new Vector3(myRigidbody2D.velocity.x, myRigidbody2D.velocity.y + jumpHeight);
                 //Sonido
