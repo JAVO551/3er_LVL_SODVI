@@ -1,4 +1,4 @@
-# Bichos en Skating 🎮
+# Bichos en Skate 🎮
 
 **Equipo:** 6
 
@@ -25,7 +25,7 @@ Por esa razon nos propusimos aprovechar los controles táctiles que nos ofrecen 
 
 ## **Descripción del proyecto:**
 
-En este apartado, incluiras una descripción detallada de cómo se llevó a cabo la creación de tu proyecto y las razones detrás de las decisiones que tomaste.
+Para el desarrollo de este trabajo el manager decidio divir los sprints de trabajo en sprints semanales con entregas de resultados en reunion cada domingo de 4 a 6 de la tarde. La desición de esta división de trabajo se debio a que todos los integrantes del equipo son estudiantes con vidas académicas bastante ocupadas por lo que ninguno de los integrantes nos podiamos exigir lapsos más cortos entre sprints. A pesar de nuestras vidas académicas tampoco nos podiamos permitir un lapso más grande entre sprints ya que la comunicación entre todas las partes del equipo era escencial, por eso una comunicación semanal en un momento desocupado de nuetras vidas académicas de una forma constante era la mejor forma de trabajo. Teniamos flexibilidad en nuestro modo de trabajo cada semana y una constancia en nuestros progresos.
 
 ![image](https://github.com/JAVO551/3er_LVL_SODVI/assets/112450653/c17500d6-ac8f-4bd3-8ede-9cb554b04825)
 
