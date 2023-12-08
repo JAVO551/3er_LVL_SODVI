@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Finish : MonoBehaviour
 {
+    [SerializeField] int nivel;
     private void OnTriggerEnter2D(Collider2D other)
     {
         if(other.tag == "Player")
@@ -17,6 +18,6 @@ public class Finish : MonoBehaviour
     void ReloadScene()
     {
         Debug.Log("Ganaste");
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(nivel);
     }
 }

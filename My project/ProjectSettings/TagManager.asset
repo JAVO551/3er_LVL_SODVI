@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Ground
   - Enemy
+  - GM
   layers:
   - Default
   - TransparentFX
@@ -13,9 +14,9 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Ground
+  - Fondo
+  - Wall
   - 
   - 
   - 
@@ -63,4 +64,7 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 978713999
+    locked: 0
+  - name: Coleccionables
+    uniqueID: 434644563
     locked: 0
