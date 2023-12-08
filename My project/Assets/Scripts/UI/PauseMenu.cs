@@ -6,6 +6,12 @@ using UnityEngine.SceneManagement;
 public class PauseMenu : MonoBehaviour
 {
     [SerializeField] GameObject pauseMenu;
+    private GameMaster gm;
+
+    void Start()
+    {
+        gm = GameObject.FindGameObjectWithTag("GM").GetComponent<GameMaster>();
+    }
     public void Pause()
     {
         pauseMenu.SetActive(true);
@@ -26,6 +32,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
+        gm.lastCheckPointPos = new Vector2(0,0);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         Time.timeScale = 1;
     }
