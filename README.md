@@ -29,8 +29,10 @@ En este apartado, incluiras una descripción detallada de cómo se llevó a cabo
 
 ![image](https://github.com/JAVO551/3er_LVL_SODVI/assets/112450653/c17500d6-ac8f-4bd3-8ede-9cb554b04825)
 
+![image](https://github.com/JAVO551/3er_LVL_SODVI/assets/112450653/33f77dd5-3fab-4249-a466-f07daee500e0)
 
 
+![image](https://github.com/JAVO551/3er_LVL_SODVI/assets/112450653/84d510d6-37c4-4774-a0af-8ca2c5036865)
 
 
 ![image](https://github.com/JAVO551/3er_LVL_SODVI/assets/112450653/205da0dd-8f73-4906-a3bf-9ab76e48fb2f)
@@ -41,8 +43,13 @@ En este apartado, incluiras una descripción detallada de cómo se llevó a cabo
 
 ## **Conclusión:** 
 
-Para finalizar, cada miembro del equipo presentará una conclusión que resumirá los logros y aprendizajes obtenidos durante el desarrollo de este proyecto.
+*Javier Diaz:
 
+*Carlos Villaseñor:
+
+*Jorge Gutierrez: 
+
+*Fernando Tenorio:
 
 
 <h3 align="center">Documentado por Díaz Rivera Javier Enrique</h3>
