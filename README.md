@@ -306,7 +306,8 @@ Carlos trabajara en las mecánicas universales:
 
 *Carlos Villaseñor:
 
-*Jorge Gutierrez: 
+*Jorge Gutierrez: En este proyecto se ha identificado la importancia de la definición de mecánicas en un proyecto desde el inicio, especialmente porque es lo que condiciona el diseño de nivel y este a su vez establece el grueso del contenido de un juego y la calidad de experiencia que este proporciona.
+Respecto al arte se percibió la importancia de la selección de colores en sombras para otorgar más vida a las ilustraciones, tomando en consideración los efectos del color de la luz. También se implicó la necesidad de mantener una proporción al elaborar pixel art con la intención de conservar su estructura y funcionamiento en las plataformas antiguas.
 
 *Fernando Tenorio:
 
